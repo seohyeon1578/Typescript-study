@@ -1,6 +1,7 @@
 # Typescript-Study
 타입스크립트 강의를 보고 기록하는 레포지토리입니다.
 (땅콩코딩)
+(벨로퍼트)
 
 ## Typescript란?
 js에 타입을 부여한 언어, js의 모든 기능 포함하고있으며 js에 포함되지 않은 새로운 기능도 있다.
@@ -149,4 +150,41 @@ price = true; // number 또는 string 타입이 아니므로 요류 발생
 
 ```typescript
 type StrOrNum = number | string;
+```
+
+## Generics
+함수, 클래스, interface, type alias 를 사용하게 될 때 여러 종류의 타입에 대하여 호환을 맞춰야 하는 상황에서 사용하는 문법이다.
+
+```html
+만약 함수에서 return값이 어떤 타입이 올지 모를때 any라는 타입을 쓴다면 무엇이 값으로 오는지 예측 할 수 없게된다.<br>
+이런상황에서 Generics를 사용한다면 파라미터로 다양한 타입을 넣을 수도 있고 타입 지원을 지켜낼 수 있게된다.
+```
+```typescript
+//함수
+function merge<A, B>(a: A, b: B): A & B {
+  return {
+    ...a,
+    ...b
+  };
+}
+
+const merged = merge({ foo: 1 }, { bar: 1 });
+
+//인터페이스
+interface Items<T> {
+  list: T[];
+}
+
+const items: Items<string> = {
+  list: ['a', 'b', 'c']
+};
+
+//type
+type Items<T> = {
+  list: T[];
+};
+
+const items: Items<string> = {
+  list: ['a', 'b', 'c']
+};
 ```
